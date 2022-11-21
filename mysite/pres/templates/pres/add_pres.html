@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %} Загрузка презентации {% endblock %}
+{% block sidebar %}
+{% include 'inc/_sidebar.html' %}
+{% endblock %}
+
+{% block content %}
+<h1>Загрузка презентации</h1>
+
+<form enctype='multipart/form-data' action="{% url 'add_pres' %}" method="post"  >
+    {% csrf_token %}
+
+
+    {{ form.as_p}}
+
+    {% comment %}
+    {{ form.non_field.errors }}
+    <div class="form-group">
+        <label for="{{ form.title.id_for_label }}" class="form-label">Название: </label>
+        {{ form.title }}
+        <div class="invalid-feedback">
+            {{ form.title.errors }}
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="{{ form.content.id_for_label }}" class="form-label">Описание: </label>
+        {{ form.content }}
+        <div class="invalid-feedback">
+            {{ form.content.errors }}
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="{{ form.document.id_for_label }}" class="form-label">Документ: </label>
+        {{ form.document }}
+        <div class="invalid-feedback">
+            {{ form.document.errors }}
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="{{ form.category.id_for_label }}" class="form-label">Категория: </label>
+        {{ form.category }}
+        <div class="invalid-feedback">
+            {{ form.category.errors }}
+        </div>
+    </div>
+    {% endcomment %}
+    <button type="submit" class="btn btn-primary btn-block" > Загрузить презентацию</button>
+</form>
+
+{% endblock %}

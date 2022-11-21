@@ -1,0 +1,17 @@
+{% load pres_tags %}
+{% comment 'Дополнительный блок для показа sidebar' %}
+<div class="list-group">
+    {% get_categories as categories %}
+        {% for item in categories %}
+      <a href="{% url 'category' item.pk %}" class="list-group-item list-group-item-action">
+        {{item.title}}
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+
+            <span class="visually-hidden">unread messages</span>
+      </a>
+        {% endfor %}
+</div>
+<br>
+{% endcomment %}
+
+{% show_categories %}

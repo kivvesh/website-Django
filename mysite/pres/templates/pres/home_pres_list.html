@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ name }} {{title_pres}} {% endblock %}
+{% block sidebar %}
+{% include 'inc/_sidebar.html' %}
+{% endblock %}
+
+
+{% block content %}
+      <h1> {{title}} {{title_pres}}</h1>
+  {% for item in pres %}
+    {% if item.is_published %}
+    <div class="card mb-3">
+      <div class="card-header">
+        Категория: <a href="{{ item.category.get_absolute_url }}">{{item.category.title}}</a>
+        <br>
+          👀: {{ item.views }}
+
+      </div>
+
+      <div class="card-body">
+        <div clss="media">
+          <h5 class="card-title">{{item.title}}</h5>
+          <p class="card-text">{{item.content|truncatewords:50}}</p>
+          {% if item.document %}
+          <a href="{{ item.document.url }}" download="{{item.document}}"  class="btn btn-primary">Скачать</a>
+          {% endif %}
+          <a href="{{ item.get_absolute_url }}" type="button" class="btn btn-info">Подробнее...</a>
+        </div>
+      </div>
+      <div class="card-footer text-muted">
+          📅 {{ item.created_at|date:"Y-m-d H:i" }}
+
+      </div>
+      </div>
+    {% endif %}
+  {% endfor %}
+
+{% endblock %}
+
+

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %} {{pres_item.title}} {% endblock %}
+{% block sidebar %}
+{% include 'inc/_sidebar.html' %}
+{% endblock %}
+
+{% block content %}
+      <h1> {{pres_item.title}}</h1>
+    <div class="card mb-3">
+      <div class="card-header">
+        Категория: <a href="{{ pres_item.category.get_absolute_url }}">{{pres_item.category.title}}</a>
+      </div>
+      <div class="card-body">
+        <div clss="media">
+          <h5 class="card-title">{{pres_item.title}}</h5>
+          <p class="card-text">{{pres_item.content}}</p>
+          {% if pres_item.document %}
+          <a href="{{ pres_item.document.url }}" download="{{pres_item.document}}"  class="btn btn-primary">Скачать</a>
+          {% endif %}
+        </div>
+      </div>
+      <div class="card-footer text-muted">
+         📅 {{ pres_item.created_at|date:"Y-m-d H:i" }}
+      </div>
+      </div>
+
+{% endblock %}
